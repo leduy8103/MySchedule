@@ -17,7 +17,7 @@ class MyButton extends StatelessWidget {
       children: [
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.green.shade300,
+            backgroundColor: Colors.deepPurpleAccent,
             foregroundColor: Colors.white,
           ),
           onPressed: onPressed, 

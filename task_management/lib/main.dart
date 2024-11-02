@@ -1,28 +1,19 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:task_management/auth/auth_gate.dart';
-import 'package:task_management/auth/login_or_register.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:table_calendar/table_calendar.dart';
+import 'package:task_management/app.dart';
 import 'package:task_management/firebase_options.dart';
-import 'package:task_management/pages/login_page.dart';
+import 'dart:async';
+
+import 'package:task_management/simple_bloc_observer.dart';
+import 'package:user_repository/user_repository.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform
-  );
-  runApp(const MyApp());
+  await Firebase.initializeApp();
+  Bloc.observer = SimpleBlocObserver();
+  runApp(MyApp(FirebaseUserRepo()));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: AuthGate(),
-    );
-  }
-}
 
