@@ -25,12 +25,15 @@ class FirebaseScheduleRepo implements ScheduleRepository {
   @override
   Future<void> setSchedule({
     required String taskName,
-    required DateTime startDate,
-    required DateTime endDate,
+      required int categoryID,
+      required DateTime startDate,
     required TimeOfDay startTime,
-    required TimeOfDay endTime,
-    required String status,
+      required TimeOfDay endTime,
     required bool isRepeat,
+      required int notificationDuration,
+      required String notificationUnit,
+      required String note,
+      required String userID
   }) async {
     try {
       final scheduleID = await _getNextScheduleID();
@@ -38,16 +41,18 @@ class FirebaseScheduleRepo implements ScheduleRepository {
       await scheduleCollection.doc(scheduleID.toString()).set({
         'scheduleID': scheduleID,
         'taskName': taskName,
+        'categoryID': categoryID,
         'startDate':
             startDate.toIso8601String(), // Chuyển đổi DateTime thành String
-        'endDate':
-            endDate.toIso8601String(), // Chuyển đổi DateTime thành String
         'startTime':
             '${startTime.hour}:${startTime.minute}', // Chuyển đổi TimeOfDay thành String
         'endTime':
             '${endTime.hour}:${endTime.minute}', // Chuyển đổi TimeOfDay thành String
-        'status': status,
         'isRepeat': isRepeat,
+        'notificationDuration': notificationDuration,
+        'notificationUnit': notificationUnit,
+        'note': note,
+        'userID': userID,
       });
     } catch (e) {
       throw Exception('Failed to set schedule: $e');

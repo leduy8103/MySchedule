@@ -10,24 +10,41 @@ abstract class SetScheduleEvent extends Equatable {
 
 class SetSchedule extends SetScheduleEvent {
   final String taskName;
+  final int categoryID;
   final DateTime startDate;
-  final DateTime endDate;
   final TimeOfDay startTime;
   final TimeOfDay endTime;
-  final String status;
   final bool isRepeat;
+  final int notificationDuration;
+  final String notificationUnit;
+  final String note;
+  final String userID;
 
   const SetSchedule({
     required this.taskName,
+    required this.categoryID,
     required this.startDate,
-    required this.endDate,
     required this.startTime,
     required this.endTime,
-    required this.status,
     required this.isRepeat,
+    required this.notificationDuration,
+    required this.notificationUnit,
+    required this.note,
+    required this.userID,
   });
 
   @override
   List<Object> get props =>
-      [taskName, startDate, endDate, startTime, endTime, status, isRepeat];
+      [
+        taskName,
+        categoryID,
+        startDate,
+        startTime,
+        endTime,
+        isRepeat,
+        notificationDuration,
+        notificationUnit,
+        note,
+        userID
+      ];
 }

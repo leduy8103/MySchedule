@@ -69,4 +69,9 @@ class FirebaseUserRepo implements UserRepository {
       rethrow;
     }
   }
+  
+  @override
+  Future<String?> getCurrentUID() async {
+    return _firebaseAuth.currentUser?.uid;
+  }
 }

@@ -15,12 +15,15 @@ class SetScheduleBloc extends Bloc<SetScheduleEvent, SetScheduleState> {
         // Lưu lịch vào Firestore
         await scheduleRepository.setSchedule(
           taskName: event.taskName,
+          categoryID: event.categoryID,
           startDate: event.startDate,
-          endDate: event.endDate,
           startTime: event.startTime,
           endTime: event.endTime,
-          status: event.status,
           isRepeat: event.isRepeat,
+          notificationDuration: event.notificationDuration,
+          notificationUnit: event.notificationUnit,
+          note: event.note,
+          userID: event.userID,
         );
 
         emit(SetScheduleSuccess()); // Phát ra trạng thái Success

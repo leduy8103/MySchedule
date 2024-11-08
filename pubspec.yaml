@@ -52,11 +52,16 @@ dependencies:
 
   equatable: ^2.0.5
 
+  flutter_colorpicker: ^1.0.3
+
   user_repository:
     path: packages/user_repository
 
   schedule_repository:
     path: packages/schedule_repository
+
+  schedule_category_repository:
+    path: packages/schedule_category_repository
 
 dev_dependencies:
   flutter_test:

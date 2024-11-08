@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:schedule_category_repository/schedule_category_repository.dart';
 import 'package:schedule_repository/schedule_repository.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:task_management/screens/schedule/blocs/set_schedule/set_schedule_bloc.dart';
 import 'package:task_management/screens/schedule/views/set_schedule_screen.dart';
+import 'package:task_management/screens/schedule_category/bloc/get_categories/get_categories_bloc.dart';
 import '../blocs/schedule_page/scheduleState.dart';
 import '../blocs/schedule_page/scheduleEvent.dart';
 import '../blocs/schedule_page/scheduleBloc.dart';
@@ -107,7 +109,25 @@ class _ScheduleScreenState extends State<scheduleScreen> {
           Center(
             child: ElevatedButton(
               onPressed: () {
-                // Handle Set Schedule button press
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MultiBlocProvider(
+                      providers: [
+                        BlocProvider(
+                          create: (context) => SetScheduleBloc(
+                              scheduleRepository: FirebaseScheduleRepo()),
+                        ),
+                        BlocProvider(
+                          create: (context) => GetCategoriesBloc(
+                              categoryRepo:
+                                  FirebaseScheduleCategoryRepo()), // Add your GetCategoriesBloc here
+                        ),
+                      ],
+                      child: SetScheduleScreen(),
+                    ),
+                  ),
+                );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.pinkAccent,
